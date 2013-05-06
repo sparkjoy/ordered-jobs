@@ -18,3 +18,11 @@ c =>"))))
 b => c
 c =>"))))
 
+(deftest t4
+  (is (= "afcbde" (schedule "a =>
+b => c
+c => f
+d => a
+e => b
+f =>"))))
+

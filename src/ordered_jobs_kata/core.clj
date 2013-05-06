@@ -12,7 +12,7 @@
 (defn order-jobs [depmap jobs]
   (if-let [job (first jobs)]
     (let [deps (seq (depmap job))]
-      (distinct (concat deps
+      (distinct (concat (order-jobs depmap deps)
                         [job]
                         (order-jobs depmap (rest jobs)))))))
 
