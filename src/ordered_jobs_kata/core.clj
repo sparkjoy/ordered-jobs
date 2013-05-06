@@ -4,10 +4,17 @@
 (defn parse [s]
   (map #(s/split % #"\s+=>\s*") (s/split s #"\n")))
 
+(defn find-error [depmap]
+  (if (some (fn [[job deps]] (deps job)) depmap)
+    "Error: a job may not depend on itself"))
+
 (defn dependency-map [facts]
   (let [depmaps (for [[job dep :as fact] facts]
-                  {job #{dep}})]
-    (apply merge-with conj depmaps)))
+                  {job #{dep}})
+        depmap (apply merge-with conj depmaps)]
+    (if-let [error-msg (find-error depmap)]
+      (throw (Exception. error-msg))
+      depmap)))
 
 (defn order-jobs [depmap jobs]
   (if-let [job (first jobs)]

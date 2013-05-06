@@ -26,3 +26,9 @@ d => a
 e => b
 f =>"))))
 
+(deftest t5
+  (is (thrown-with-msg? Exception #"Error: a job may not depend on itself"
+        (schedule "a =>
+b =>
+c => c"))))
+
