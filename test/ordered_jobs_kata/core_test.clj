@@ -5,3 +5,6 @@
 (deftest t0
   (is (= "" (schedule ""))))
 
+(deftest t1
+  (is (= "a" (schedule "a =>"))))
+
