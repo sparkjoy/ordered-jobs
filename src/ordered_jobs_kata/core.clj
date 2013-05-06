@@ -4,9 +4,18 @@
 (defn parse [s]
   (map #(s/split % #"\s+=>\s*") (s/split s #"\n")))
 
-(defn find-error [depmap]
-  (if (some (fn [[job deps]] (deps job)) depmap)
-    "Error: a job may not depend on itself"))
+(defn find-error
+  ([depmap] (find-error depmap #{} (map first depmap)))
+  ([depmap seen jobs]
+     (when-let [job (first jobs)]
+       (if (seen job)
+         "Error: jobs must not have circular dependencies"
+         (or (let [seen (conj seen job)]
+               (if-let [deps (depmap job)]
+                 (if (deps job)
+                   "Error: a job may not depend on itself"
+                   (find-error depmap seen deps))))
+             (find-error depmap seen (rest jobs)))))))
 
 (defn dependency-map [facts]
   (let [depmaps (for [[job dep :as fact] facts]

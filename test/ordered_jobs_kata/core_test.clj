@@ -32,3 +32,12 @@ f =>"))))
 b =>
 c => c"))))
 
+(deftest t6
+  (is (thrown-with-msg? Exception #"Error: jobs must not have circular dependencies"
+        (schedule "a =>
+b => c
+c => f
+d => a
+e =>
+f => b"))))
+
