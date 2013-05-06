@@ -2,5 +2,7 @@
   (:require [clojure.string :as s]))
 
 (defn schedule [s]
-  (first (s/split s #"\s+=>")))
+  (let [facts (map #(s/split % #"\s+=>") (s/split s #"\n"))
+        jobs (map first facts)]
+    (apply str jobs)))
 

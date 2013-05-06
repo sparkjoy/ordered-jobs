@@ -8,3 +8,8 @@
 (deftest t1
   (is (= "a" (schedule "a =>"))))
 
+(deftest t2
+  (is (= "abc" (schedule "a =>
+b =>
+c =>"))))
+
