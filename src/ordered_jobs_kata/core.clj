@@ -18,7 +18,7 @@
              (find-error depmap seen (rest jobs)))))))
 
 (defn dependency-map [facts]
-  (let [depmaps (for [[job dep :as fact] facts]
+  (let [depmaps (for [[job dep] facts]
                   {job #{dep}})
         depmap (apply merge-with conj depmaps)]
     (if-let [error-msg (find-error depmap)]
