@@ -13,3 +13,8 @@
 b =>
 c =>"))))
 
+(deftest t3
+  (is (= "acb" (schedule "a =>
+b => c
+c =>"))))
+
