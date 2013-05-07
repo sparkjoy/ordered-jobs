@@ -1,13 +1,4 @@
 # ordered-jobs-kata
 
-A Clojure library designed to ... well, that part is up to you.
-
-## Usage
-
-FIXME
-
-## License
-
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License, the same as Clojure.
+A solution to the ordered jobs kata in Clojure. Feedback welcome!
+http://invalidcast.com/2011/09/the-ordered-jobs-kata
